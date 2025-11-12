@@ -19,7 +19,7 @@ O projeto foi criado com o objetivo de promover acolhimento e ação rápida fre
 
 ## 🧱 Estrutura do Projeto
 
-´´´
+'''
 apoioja_project/
 │
 ├── app/
@@ -36,7 +36,8 @@ apoioja_project/
 ├── app.db # Banco SQLite (ignorado no Git)
 ├── requirements.txt # Dependências do projeto
 └── README.md # Este arquivo
-´´´
+
+'''
 
 
 ---
