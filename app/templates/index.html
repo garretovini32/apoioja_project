@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ApoioJá 💙</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <button class="silent-mode" onclick="modoSilencio()">🕵️ Modo Silêncio</button>
+    <div class="container">
+        <h1>💙 ApoioJá</h1>
+        <h3>Um espaço seguro e anônimo para pedir ajuda e denunciar.</h3>
+        <img src="{{ url_for('static', filename='apoioja_banner.png') }}" alt="Banner ApoioJá" width="100%">
+        <div>
+            <button onclick="window.location.href='/denuncia'">🚨 Fazer uma Denúncia</button>
+        </div>
+    </div>
+
+    <script>
+        function modoSilencio() {
+            localStorage.clear();
+            window.location.href = 'https://www.google.com';
+        }
+    </script>
+</body>
+</html>

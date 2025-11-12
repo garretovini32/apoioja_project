@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fazer Denúncia - ApoioJá 💙</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <button class="silent-mode" onclick="modoSilencio()">🕵️ Modo Silêncio</button>
+    <div class="container">
+        <h2>🚨 Fazer uma Denúncia</h2>
+
+        <form id="denunciaForm">
+            <label>Categoria:</label>
+            <select id="category" required>
+                <option value="">Selecione...</option>
+                <option>Violência Doméstica</option>
+                <option>Abuso Psicológico</option>
+                <option>Discriminação</option>
+                <option>Outros</option>
+            </select>
+
+            <label>Local:</label>
+            <input type="text" id="location" placeholder="Informe o local" required>
+
+            <label>Descrição:</label>
+            <textarea id="description" placeholder="Descreva o ocorrido" required></textarea>
+
+            <button type="submit">Enviar Denúncia</button>
+            <button type="reset">Limpar Campos</button>
+            <button type="button" onclick="window.location.href='/'">Esconder</button>
+        </form>
+
+        <p id="mensagem"></p>
+
+        <img id="mapa" src="{{ url_for('static', filename='mapa_mock.png') }}" alt="Mapa" />
+    </div>
+
+    <script>
+        async function enviarDenuncia(event) {
+            event.preventDefault();
+            const data = {
+                category: document.getElementById('category').value,
+                location: document.getElementById('location').value,
+                description: document.getElementById('description').value
+            };
+
+            const resposta = await fetch('/api/reports', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+
+            const resultado = await resposta.json();
+            const msg = document.getElementById('mensagem');
+            msg.textContent = resultado.message || resultado.error;
+
+            if (resposta.ok) document.getElementById('denunciaForm').reset();
+        }
+
+        document.getElementById('denunciaForm').addEventListener('submit', enviarDenuncia);
+
+        function modoSilencio() {
+            localStorage.clear();
+            window.location.href = 'https://www.google.com';
+        }
+    </script>
+</body>
+</html>
